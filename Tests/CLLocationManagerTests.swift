@@ -1,6 +1,7 @@
-import PMKCoreLocation
+import CPKCoreLocation
 import CoreLocation
 import PromiseKit
+import CancelForPromiseKit
 import XCTest
 
 #if !os(tvOS)
@@ -9,11 +10,16 @@ class Test_CLLocationManager_Swift: XCTestCase {
     func test_fulfills_with_multiple_locations() {
         swizzle(CLLocationManager.self, #selector(CLLocationManager.startUpdatingLocation)) {
             swizzle(CLLocationManager.self, #selector(CLLocationManager.authorizationStatus), isClassMethod: true) {
+                let context = CancelContext()
                 let ex = expectation(description: "")
 
-                CLLocationManager.requestLocation().done { x in
-                    XCTAssertEqual(x, dummy)
-                    ex.fulfill()
+                CLLocationManager.requestLocation(cancel: context).doneCC { x in
+                    XCTFail("not cancelled")
+                }.catch(policy: .allErrors) { error in
+                    error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
+                }
+                after(.milliseconds(50)).done {
+                    context.cancel()
                 }
 
                 waitForExpectations(timeout: 1)
@@ -24,14 +30,19 @@ class Test_CLLocationManager_Swift: XCTestCase {
     func test_fufillsWithSatisfyingBlock() {
         swizzle(CLLocationManager.self, #selector(CLLocationManager.startUpdatingLocation)) {
             swizzle(CLLocationManager.self, #selector(CLLocationManager.authorizationStatus), isClassMethod: true) {
+                let context = CancelContext()
                 let ex = expectation(description: "")
                 let block: ((CLLocation) -> Bool) = { location in
                     return location.coordinate.latitude == dummy.last?.coordinate.latitude
                 }
-                CLLocationManager.requestLocation(satisfying: block).done({ locations in
-                    locations.forEach { XCTAssert(block($0) == true, "Block should be successful for returned values") }
-                    ex.fulfill()
-                })
+                CLLocationManager.requestLocation(satisfying: block, cancel: context).doneCC { locations in
+                    XCTFail("not cancelled")
+                }.catch(policy: .allErrors) { error in
+                    error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
+                }
+                after(.milliseconds(50)).done {
+                    context.cancel()
+                }
                 waitForExpectations(timeout: 1)
             }
         }
@@ -39,11 +50,16 @@ class Test_CLLocationManager_Swift: XCTestCase {
 
 #if os(iOS)
     func test_requestAuthorization() {
+        let context = CancelContext()
         let ex = expectation(description: "")
 
-        CLLocationManager.requestAuthorization().done {
-            XCTAssertEqual($0, CLAuthorizationStatus.restricted)
-            ex.fulfill()
+        CLLocationManager.requestAuthorization(cancel: context).doneCC {
+            XCTFail("not cancelled")
+        }.catch(policy: .allErrors) { error in
+            error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
+        }
+        after(.milliseconds(5)).done {
+            context.cancel()
         }
 
         waitForExpectations(timeout: 1, handler: nil)
@@ -93,3 +109,4 @@ func swizzle(_ foo: AnyClass, _ from: Selector, isClassMethod: Bool = false, bod
 }
 
 #endif
+

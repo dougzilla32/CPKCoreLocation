@@ -7,16 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		63199F0C1D5FF25C007E8A0E /* CLGeocoder+AnyPromise.h in Headers */ = {isa = PBXBuildFile; fileRef = 63199F061D5FF25C007E8A0E /* CLGeocoder+AnyPromise.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		63199F0D1D5FF25C007E8A0E /* CLGeocoder+AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 63199F071D5FF25C007E8A0E /* CLGeocoder+AnyPromise.m */; };
 		63199F0E1D5FF25C007E8A0E /* CLGeocoder+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63199F081D5FF25C007E8A0E /* CLGeocoder+Promise.swift */; };
-		63199F0F1D5FF25C007E8A0E /* CLLocationManager+AnyPromise.h in Headers */ = {isa = PBXBuildFile; fileRef = 63199F091D5FF25C007E8A0E /* CLLocationManager+AnyPromise.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		63199F101D5FF25C007E8A0E /* CLLocationManager+AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 63199F0A1D5FF25C007E8A0E /* CLLocationManager+AnyPromise.m */; };
 		63199F111D5FF25C007E8A0E /* CLLocationManager+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63199F0B1D5FF25C007E8A0E /* CLLocationManager+Promise.swift */; };
 		63199F161D5FF7B9007E8A0E /* CLGeocoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63199F141D5FF7B9007E8A0E /* CLGeocoderTests.swift */; };
 		63199F171D5FF7B9007E8A0E /* CLLocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63199F151D5FF7B9007E8A0E /* CLLocationManagerTests.swift */; };
-		6358AB7A1D5D4B6700B9B157 /* PMKCoreLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6358AB791D5D4B6700B9B157 /* PMKCoreLocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		63C7FFF71D5C020D003BAE60 /* PMKCoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C7FFA71D5BEE09003BAE60 /* PMKCoreLocation.framework */; };
+		63C7FFF71D5C020D003BAE60 /* CPKCoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C7FFA71D5BEE09003BAE60 /* CPKCoreLocation.framework */; };
+		91B517A620A3938000CD1213 /* Pods_CancelForPromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B517A520A3938000CD1213 /* Pods_CancelForPromiseKit.framework */; };
+		91B517A820A3938400CD1213 /* CancelForPromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B517A720A3938400CD1213 /* CancelForPromiseKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,20 +27,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		63199F061D5FF25C007E8A0E /* CLGeocoder+AnyPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CLGeocoder+AnyPromise.h"; path = "Sources/CLGeocoder+AnyPromise.h"; sourceTree = SOURCE_ROOT; };
-		63199F071D5FF25C007E8A0E /* CLGeocoder+AnyPromise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CLGeocoder+AnyPromise.m"; path = "Sources/CLGeocoder+AnyPromise.m"; sourceTree = SOURCE_ROOT; };
 		63199F081D5FF25C007E8A0E /* CLGeocoder+Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CLGeocoder+Promise.swift"; path = "Sources/CLGeocoder+Promise.swift"; sourceTree = SOURCE_ROOT; };
-		63199F091D5FF25C007E8A0E /* CLLocationManager+AnyPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CLLocationManager+AnyPromise.h"; path = "Sources/CLLocationManager+AnyPromise.h"; sourceTree = SOURCE_ROOT; };
-		63199F0A1D5FF25C007E8A0E /* CLLocationManager+AnyPromise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CLLocationManager+AnyPromise.m"; path = "Sources/CLLocationManager+AnyPromise.m"; sourceTree = SOURCE_ROOT; };
 		63199F0B1D5FF25C007E8A0E /* CLLocationManager+Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CLLocationManager+Promise.swift"; path = "Sources/CLLocationManager+Promise.swift"; sourceTree = SOURCE_ROOT; };
 		63199F141D5FF7B9007E8A0E /* CLGeocoderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLGeocoderTests.swift; path = Tests/CLGeocoderTests.swift; sourceTree = SOURCE_ROOT; };
 		63199F151D5FF7B9007E8A0E /* CLLocationManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CLLocationManagerTests.swift; path = Tests/CLLocationManagerTests.swift; sourceTree = SOURCE_ROOT; };
-		6358AB791D5D4B6700B9B157 /* PMKCoreLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMKCoreLocation.h; path = Sources/PMKCoreLocation.h; sourceTree = SOURCE_ROOT; };
 		63C700091D5C0253003BAE60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		63C7FFA71D5BEE09003BAE60 /* PMKCoreLocation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PMKCoreLocation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		63C7FFF21D5C020D003BAE60 /* PMKCLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PMKCLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		63C7FFA71D5BEE09003BAE60 /* CPKCoreLocation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CPKCoreLocation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63C7FFF21D5C020D003BAE60 /* CPKCLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CPKCLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63CCF8121D5C0C4E00503216 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		63CCF8171D5C11B500503216 /* Carthage.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Carthage.xcconfig; sourceTree = "<group>"; };
+		91B517A520A3938000CD1213 /* Pods_CancelForPromiseKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_CancelForPromiseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		91B517A720A3938400CD1213 /* CancelForPromiseKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CancelForPromiseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +45,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91B517A820A3938400CD1213 /* CancelForPromiseKit.framework in Frameworks */,
+				91B517A620A3938000CD1213 /* Pods_CancelForPromiseKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63C7FFF71D5C020D003BAE60 /* PMKCoreLocation.framework in Frameworks */,
+				63C7FFF71D5C020D003BAE60 /* CPKCoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,14 +70,15 @@
 				63C7FFA91D5BEE09003BAE60 /* Sources */,
 				63C7FFF31D5C020D003BAE60 /* Tests */,
 				63C7FFA81D5BEE09003BAE60 /* Products */,
+				91B517A420A3938000CD1213 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		63C7FFA81D5BEE09003BAE60 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				63C7FFA71D5BEE09003BAE60 /* PMKCoreLocation.framework */,
-				63C7FFF21D5C020D003BAE60 /* PMKCLTests.xctest */,
+				63C7FFA71D5BEE09003BAE60 /* CPKCoreLocation.framework */,
+				63C7FFF21D5C020D003BAE60 /* CPKCLTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -89,12 +86,7 @@
 		63C7FFA91D5BEE09003BAE60 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				6358AB791D5D4B6700B9B157 /* PMKCoreLocation.h */,
-				63199F061D5FF25C007E8A0E /* CLGeocoder+AnyPromise.h */,
-				63199F071D5FF25C007E8A0E /* CLGeocoder+AnyPromise.m */,
 				63199F081D5FF25C007E8A0E /* CLGeocoder+Promise.swift */,
-				63199F091D5FF25C007E8A0E /* CLLocationManager+AnyPromise.h */,
-				63199F0A1D5FF25C007E8A0E /* CLLocationManager+AnyPromise.m */,
 				63199F0B1D5FF25C007E8A0E /* CLLocationManager+Promise.swift */,
 			);
 			path = Sources;
@@ -109,6 +101,15 @@
 			path = Tests;
 			sourceTree = SOURCE_ROOT;
 		};
+		91B517A420A3938000CD1213 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				91B517A720A3938400CD1213 /* CancelForPromiseKit.framework */,
+				91B517A520A3938000CD1213 /* Pods_CancelForPromiseKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -116,18 +117,15 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63199F0F1D5FF25C007E8A0E /* CLLocationManager+AnyPromise.h in Headers */,
-				63199F0C1D5FF25C007E8A0E /* CLGeocoder+AnyPromise.h in Headers */,
-				6358AB7A1D5D4B6700B9B157 /* PMKCoreLocation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		63C7FFA61D5BEE09003BAE60 /* PMKCoreLocation */ = {
+		63C7FFA61D5BEE09003BAE60 /* CPKCoreLocation */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 63C7FFAF1D5BEE09003BAE60 /* Build configuration list for PBXNativeTarget "PMKCoreLocation" */;
+			buildConfigurationList = 63C7FFAF1D5BEE09003BAE60 /* Build configuration list for PBXNativeTarget "CPKCoreLocation" */;
 			buildPhases = (
 				63C7FFA21D5BEE09003BAE60 /* Sources */,
 				63C7FFA31D5BEE09003BAE60 /* Frameworks */,
@@ -137,27 +135,26 @@
 			);
 			dependencies = (
 			);
-			name = PMKCoreLocation;
+			name = CPKCoreLocation;
 			productName = "PMK+UIKit";
-			productReference = 63C7FFA71D5BEE09003BAE60 /* PMKCoreLocation.framework */;
+			productReference = 63C7FFA71D5BEE09003BAE60 /* CPKCoreLocation.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		63C7FFF11D5C020D003BAE60 /* PMKCLTests */ = {
+		63C7FFF11D5C020D003BAE60 /* CPKCLTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 63C7FFFA1D5C020D003BAE60 /* Build configuration list for PBXNativeTarget "PMKCLTests" */;
+			buildConfigurationList = 63C7FFFA1D5C020D003BAE60 /* Build configuration list for PBXNativeTarget "CPKCLTests" */;
 			buildPhases = (
 				63C7FFEE1D5C020D003BAE60 /* Sources */,
 				63C7FFEF1D5C020D003BAE60 /* Frameworks */,
-				639447051D5D011300DDAE3C /* Embed Carthage Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				63C7FFF91D5C020D003BAE60 /* PBXTargetDependency */,
 			);
-			name = PMKCLTests;
+			name = CPKCLTests;
 			productName = PMKTests/NS;
-			productReference = 63C7FFF21D5C020D003BAE60 /* PMKCLTests.xctest */;
+			productReference = 63C7FFF21D5C020D003BAE60 /* CPKCLTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -182,7 +179,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 63C7FFA11D5BEE09003BAE60 /* Build configuration list for PBXProject "PMKCoreLocation" */;
+			buildConfigurationList = 63C7FFA11D5BEE09003BAE60 /* Build configuration list for PBXProject "CPKCoreLocation" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -194,29 +191,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				63C7FFA61D5BEE09003BAE60 /* PMKCoreLocation */,
-				63C7FFF11D5C020D003BAE60 /* PMKCLTests */,
+				63C7FFA61D5BEE09003BAE60 /* CPKCoreLocation */,
+				63C7FFF11D5C020D003BAE60 /* CPKCLTests */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		639447051D5D011300DDAE3C /* Embed Carthage Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				PromiseKit,
-			);
-			name = "Embed Carthage Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "case \"$PLATFORM_NAME\" in\nmacosx) plat=Mac;;\niphone*) plat=iOS;;\nwatch*) plat=watchOS;;\nappletv*) plat=tvOS;;\n*) echo \"error: Unknown PLATFORM_NAME: $PLATFORM_NAME\"; exit 1;;\nesac\nfor (( n = 0; n < SCRIPT_INPUT_FILE_COUNT; n++ )); do\nVAR=SCRIPT_INPUT_FILE_$n\nframework=$(basename \"${!VAR}\")\nexport SCRIPT_INPUT_FILE_$n=\"$SRCROOT\"/Carthage/Build/$plat/\"$framework\".framework\ndone\n\n/usr/local/bin/carthage copy-frameworks || exit\n\nfor (( n = 0; n < SCRIPT_INPUT_FILE_COUNT; n++ )); do\nVAR=SCRIPT_INPUT_FILE_$n\nsource=${!VAR}.dSYM\ndest=${BUILT_PRODUCTS_DIR}/$(basename \"$source\")\nditto \"$source\" \"$dest\" || exit\ndone";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		63C7FFA21D5BEE09003BAE60 /* Sources */ = {
@@ -224,8 +203,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				63199F0E1D5FF25C007E8A0E /* CLGeocoder+Promise.swift in Sources */,
-				63199F101D5FF25C007E8A0E /* CLLocationManager+AnyPromise.m in Sources */,
-				63199F0D1D5FF25C007E8A0E /* CLGeocoder+AnyPromise.m in Sources */,
 				63199F111D5FF25C007E8A0E /* CLLocationManager+Promise.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -244,7 +221,7 @@
 /* Begin PBXTargetDependency section */
 		63C7FFF91D5C020D003BAE60 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 63C7FFA61D5BEE09003BAE60 /* PMKCoreLocation */;
+			target = 63C7FFA61D5BEE09003BAE60 /* CPKCoreLocation */;
 			targetProxy = 63C7FFF81D5C020D003BAE60 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -440,7 +417,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		63C7FFA11D5BEE09003BAE60 /* Build configuration list for PBXProject "PMKCoreLocation" */ = {
+		63C7FFA11D5BEE09003BAE60 /* Build configuration list for PBXProject "CPKCoreLocation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				63C7FFAD1D5BEE09003BAE60 /* Debug */,
@@ -449,7 +426,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		63C7FFAF1D5BEE09003BAE60 /* Build configuration list for PBXNativeTarget "PMKCoreLocation" */ = {
+		63C7FFAF1D5BEE09003BAE60 /* Build configuration list for PBXNativeTarget "CPKCoreLocation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				63C7FFB01D5BEE09003BAE60 /* Debug */,
@@ -458,7 +435,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		63C7FFFA1D5C020D003BAE60 /* Build configuration list for PBXNativeTarget "PMKCLTests" */ = {
+		63C7FFFA1D5C020D003BAE60 /* Build configuration list for PBXNativeTarget "CPKCLTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				63C7FFFB1D5C020D003BAE60 /* Debug */,
