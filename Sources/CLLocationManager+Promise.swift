@@ -46,15 +46,17 @@ extension CLLocationManager {
        the provided block if it exists. If the block does not exist, simply return the
        last location.
      */
-    public class func requestLocation(authorizationType: RequestAuthorizationType = .automatic, satisfying block: ((CLLocation) -> Bool)? = nil, cancel: CancelContext) -> Promise<[CLLocation]> {
+    public class func requestLocationCC(authorizationType: RequestAuthorizationType = .automatic, cancel: CancelContext? = nil, satisfying block: ((CLLocation) -> Bool)? = nil) -> Promise<[CLLocation]> {
+        
+        let cancelContext = cancel ?? CancelContext()
 
         func std() -> Promise<[CLLocation]> {
-            return LocationManager(satisfying: block, cancel: cancel).promise
+            return LocationManager(cancel: cancelContext, satisfying: block).promise
         }
 
         func auth() -> Promise<Void> {
         #if os(macOS)
-            return Promise(cancel: cancel) { seal in seal.fulfill(()) }
+            return Promise(cancel: cancelContext) { seal in seal.fulfill(()) }
         #else
             func auth(type: PMKCLAuthorizationType) -> Promise<Void> {
                 return AuthorizationCatcher(type: type, cancel: cancel).promise.doneCC(on: nil) {
@@ -94,8 +96,8 @@ extension CLLocationManager {
     }
 
     @available(*, deprecated: 5.0, renamed: "requestLocation")
-    public class func promise(_ requestAuthorizationType: RequestAuthorizationType = .automatic, satisfying block: ((CLLocation) -> Bool)? = nil, cancel: CancelContext) -> Promise<[CLLocation]> {
-        return requestLocation(authorizationType: requestAuthorizationType, satisfying: block, cancel: cancel)
+    public class func promiseCC(_ requestAuthorizationType: RequestAuthorizationType = .automatic, cancel: CancelContext? = nil, satisfying block: ((CLLocation) -> Bool)? = nil) -> Promise<[CLLocation]> {
+        return requestLocationCC(authorizationType: requestAuthorizationType, cancel: cancel, satisfying: block)
     }
 }
 
@@ -103,11 +105,12 @@ private class LocationManager: CLLocationManager, CLLocationManagerDelegate, Can
     let (promise, seal) = Promise<[CLLocation]>.pending()
     let satisfyingBlock: ((CLLocation) -> Bool)?
 
-    init(satisfying block: ((CLLocation) -> Bool)? = nil, cancel: CancelContext) {
+    init(cancel: CancelContext, satisfying block: ((CLLocation) -> Bool)? = nil) {
         satisfyingBlock = block
         super.init()
         delegate = self
         
+        promise.cancelContext = cancel
         cancel.append(task: self, reject: seal.reject)
         
     #if !os(tvOS)
@@ -162,7 +165,7 @@ extension CLLocationManager {
       - Note: This method will not perform upgrades from “when-in-use” to “always” unless you specify `.always` for the value of `type`.
      */
     @available(iOS 8, tvOS 9, watchOS 2, *)
-    public class func requestAuthorization(type requestedAuthorizationType: RequestAuthorizationType = .automatic, cancel: CancelContext) -> Promise<CLAuthorizationStatus> {
+    public class func requestAuthorization(type requestedAuthorizationType: RequestAuthorizationType = .automatic, cancel: CancelContext? = nil) -> Promise<CLAuthorizationStatus> {
 
         let currentStatus = CLLocationManager.authorizationStatus()
 
@@ -170,7 +173,7 @@ extension CLLocationManager {
             if currentStatus == .notDetermined {
                 return AuthorizationCatcher(type: type, cancel: cancel).promise
             } else {
-                return .value(currentStatus, cancel: cancel)
+                return .valueCC(currentStatus, cancel: cancel)
             }
         }
 
@@ -181,7 +184,7 @@ extension CLLocationManager {
                 case .notDetermined, .authorizedWhenInUse:
                     return AuthorizationCatcher(type: .always, cancel: cancel).promise
                 default:
-                    return .value(currentStatus, cancel: cancel)
+                    return .valueCC(currentStatus, cancel: cancel)
                 }
             }
         #if PMKiOS11
@@ -208,7 +211,7 @@ extension CLLocationManager {
                     return AuthorizationCatcher(type: .always, cancel: cancel).promise
                 }
             } else {
-                return .value(currentStatus, cancel: cancel)
+                return .valueCC(currentStatus, cancel: cancel)
             }
         }
     }
@@ -223,6 +226,7 @@ private class AuthorizationCatcher: CLLocationManager, CLLocationManagerDelegate
     init(type: PMKCLAuthorizationType, cancel: CancelContext) {
         super.init()
 
+        promise.cancelContext = cancel
         cancel.append(task: self, reject: seal.reject)
         
         func ask(type: PMKCLAuthorizationType) {

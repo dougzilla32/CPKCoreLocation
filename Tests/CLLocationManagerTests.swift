@@ -13,7 +13,7 @@ class Test_CLLocationManager_Swift: XCTestCase {
                 let context = CancelContext()
                 let ex = expectation(description: "")
 
-                CLLocationManager.requestLocation(cancel: context).doneCC { x in
+                CLLocationManager.requestLocationCC(cancel: context).doneCC { x in
                     XCTFail("not cancelled")
                 }.catch(policy: .allErrors) { error in
                     error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
@@ -35,9 +35,9 @@ class Test_CLLocationManager_Swift: XCTestCase {
                 let block: ((CLLocation) -> Bool) = { location in
                     return location.coordinate.latitude == dummy.last?.coordinate.latitude
                 }
-                CLLocationManager.requestLocation(satisfying: block, cancel: context).doneCC { locations in
+                CLLocationManager.requestLocationCC(cancel: context, satisfying: block).doneCC { locations in
                     XCTFail("not cancelled")
-                }.catch(policy: .allErrors) { error in
+                }.catchCC(policy: .allErrors) { error in
                     error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
                 }
                 after(.milliseconds(50)).done {
