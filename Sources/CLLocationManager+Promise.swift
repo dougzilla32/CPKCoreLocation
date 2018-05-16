@@ -32,13 +32,14 @@ extension CLLocationManager {
         case notAuthorized
     }
     /**
-     Request the current location.
+     Request the current location, with the ability to cancel the request.
      - Note: to obtain a single location use `Promise.lastValue`
      - Parameters:
        - authorizationType: requestAuthorizationType: We read your Info plist and try to
          determine the authorization type we should request automatically. If you
          want to force one or the other, change this parameter from its default
          value.
+       - cancel: Optional cancel context, overrides the default context.
        - block: A block by which to perform any filtering of the locations that are
          returned. In order to only retrieve accurate locations, only return true if the
          locations horizontal accuracy < 50
