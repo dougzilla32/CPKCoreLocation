@@ -13,7 +13,7 @@ class Test_CLLocationManager_Swift: XCTestCase {
                 let context = CancelContext()
                 let ex = expectation(description: "")
 
-                CLLocationManager.requestLocationCC(cancel: context).doneCC { x in
+                CLLocationManager.requestLocationCC(cancel: context).doneCC { _ in
                     XCTFail("not cancelled")
                 }.catch(policy: .allErrors) { error in
                     error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
@@ -35,7 +35,7 @@ class Test_CLLocationManager_Swift: XCTestCase {
                 let block: ((CLLocation) -> Bool) = { location in
                     return location.coordinate.latitude == dummy.last?.coordinate.latitude
                 }
-                CLLocationManager.requestLocationCC(cancel: context, satisfying: block).doneCC { locations in
+                CLLocationManager.requestLocationCC(cancel: context, satisfying: block).doneCC { _ in
                     XCTFail("not cancelled")
                 }.catchCC(policy: .allErrors) { error in
                     error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
@@ -67,7 +67,6 @@ class Test_CLLocationManager_Swift: XCTestCase {
 #endif
 }
 
-
 /////////////////////////////////////////////////////////////// resources
 private let dummy = [CLLocation(latitude: 0, longitude: 0), CLLocation(latitude: 10, longitude: 20)]
 
@@ -86,7 +85,6 @@ extension CLLocationManager {
     #endif
     }
 }
-
 
 /////////////////////////////////////////////////////////////// utilities
 import ObjectiveC
@@ -109,4 +107,3 @@ func swizzle(_ foo: AnyClass, _ from: Selector, isClassMethod: Bool = false, bod
 }
 
 #endif
-

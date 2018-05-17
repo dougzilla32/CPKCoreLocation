@@ -70,7 +70,7 @@ extension CLGeocoder {
  
 }
 
-// TODO still not possible in Swift 3.2
+// Still not possible in Swift 3.2
 //extension CLError: CancellableError {
 //    public var isCancelled: Bool {
 //        return self == .geocodeCanceled

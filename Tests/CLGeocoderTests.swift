@@ -19,7 +19,7 @@ class CLGeocoderTests: XCTestCase {
 
         let context = CancelContext()
         let ex = expectation(description: "")
-        MockGeocoder().reverseGeocodeCC(location: CLLocation(), cancel: context).doneCC { x in
+        MockGeocoder().reverseGeocodeCC(location: CLLocation(), cancel: context).doneCC { _ in
             XCTFail("not cancelled")
         }.catchCC(policy: .allErrors) { error in
             error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
@@ -31,7 +31,7 @@ class CLGeocoderTests: XCTestCase {
 
     func test_geocodeAddressDictionary() {
         class MockGeocoder: CLGeocoder {
-            override func geocodeAddressDictionary(_ addressDictionary: [AnyHashable : Any], completionHandler: @escaping CLGeocodeCompletionHandler) {
+            override func geocodeAddressDictionary(_ addressDictionary: [AnyHashable: Any], completionHandler: @escaping CLGeocodeCompletionHandler) {
                 after(.milliseconds(100)).done {
                     completionHandler([dummyPlacemark], nil)
                 }
@@ -40,7 +40,7 @@ class CLGeocoderTests: XCTestCase {
 
         let context = CancelContext()
         let ex = expectation(description: "")
-        MockGeocoder().geocodeCC([:], cancel: context).doneCC { x in
+        MockGeocoder().geocodeCC([:], cancel: context).doneCC { _ in
             XCTFail("not cancelled")
         }.catchCC(policy: .allErrors) { error in
             error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
@@ -63,7 +63,7 @@ class CLGeocoderTests: XCTestCase {
 
         let context = CancelContext()
         let ex = expectation(description: "")
-        MockGeocoder().geocodeCC("", cancel: context).doneCC { x in
+        MockGeocoder().geocodeCC("", cancel: context).doneCC { _ in
             XCTFail("not cancelled")
         }.catchCC(policy: .allErrors) { error in
             error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
@@ -88,7 +88,7 @@ class CLGeocoderTests: XCTestCase {
 
         let context = CancelContext()
         let ex = expectation(description: "")
-        MockGeocoder().geocodePostalAddressCC(CNPostalAddress(), cancel: context).doneCC { x in
+        MockGeocoder().geocodePostalAddressCC(CNPostalAddress(), cancel: context).doneCC { _ in
             XCTFail("not cancelled")
         }.catchCC(policy: .allErrors) { error in
             error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
@@ -112,7 +112,7 @@ class CLGeocoderTests: XCTestCase {
 
         let context = CancelContext()
         let ex = expectation(description: "")
-        MockGeocoder().geocodePostalAddressCC(CNPostalAddress(), preferredLocale: nil, cancel: context).doneCC { x in
+        MockGeocoder().geocodePostalAddressCC(CNPostalAddress(), preferredLocale: nil, cancel: context).doneCC { _ in
             XCTFail("not cancelled")
         }.catchCC(policy: .allErrors) { error in
             error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")

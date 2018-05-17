@@ -156,7 +156,6 @@ private class LocationManager: CLLocationManager, CLLocationManagerDelegate, Can
     var isCancelled = false
 }
 
-
 #if !os(macOS)
 
 extension CLLocationManager {
