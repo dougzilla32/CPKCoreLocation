@@ -112,7 +112,7 @@ private class LocationManager: CLLocationManager, CLLocationManagerDelegate, Can
         delegate = self
         
         promise.cancelContext = cancel
-        cancel.append(task: self, reject: seal.reject)
+        cancel.append(task: self, reject: seal.reject, description: PromiseDescription(promise))
         
     #if !os(tvOS)
         startUpdatingLocation()
