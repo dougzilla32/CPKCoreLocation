@@ -1,7 +1,7 @@
 import CPKCoreLocation
 import CoreLocation
 import PromiseKit
-@testable import CancelForPromiseKit
+import CancelForPromiseKit
 import XCTest
 
 #if !os(tvOS)
@@ -10,16 +10,15 @@ class Test_CLLocationManager_Swift: XCTestCase {
     func test_fulfills_with_multiple_locations() {
         swizzle(CLLocationManager.self, #selector(CLLocationManager.startUpdatingLocation)) {
             swizzle(CLLocationManager.self, #selector(CLLocationManager.authorizationStatus), isClassMethod: true) {
-                let context = CancelContext()
                 let ex = expectation(description: "")
 
-                CLLocationManager.requestLocationCC(cancel: context).doneCC { _ in
+                let p = CLLocationManager.requestLocationCC().done { _ in
                     XCTFail("not cancelled")
                 }.catch(policy: .allErrors) { error in
                     error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
                 }
                 after(.milliseconds(50)).done {
-                    context.cancel()
+                    p.cancel()
                 }
 
                 waitForExpectations(timeout: 1)
@@ -30,18 +29,17 @@ class Test_CLLocationManager_Swift: XCTestCase {
     func test_fufillsWithSatisfyingBlock() {
         swizzle(CLLocationManager.self, #selector(CLLocationManager.startUpdatingLocation)) {
             swizzle(CLLocationManager.self, #selector(CLLocationManager.authorizationStatus), isClassMethod: true) {
-                let context = CancelContext()
                 let ex = expectation(description: "")
                 let block: ((CLLocation) -> Bool) = { location in
                     return location.coordinate.latitude == dummy.last?.coordinate.latitude
                 }
-                CLLocationManager.requestLocationCC(cancel: context, satisfying: block).doneCC { _ in
+                let p = CLLocationManager.requestLocationCC(satisfying: block).done { _ in
                     XCTFail("not cancelled")
-                }.catchCC(policy: .allErrors) { error in
+                }.catch(policy: .allErrors) { error in
                     error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
                 }
                 after(.milliseconds(50)).done {
-                    context.cancel()
+                    p.cancel()
                 }
                 waitForExpectations(timeout: 1)
             }
@@ -50,16 +48,15 @@ class Test_CLLocationManager_Swift: XCTestCase {
 
 #if os(iOS)
     func test_requestAuthorization() {
-        let context = CancelContext()
         let ex = expectation(description: "")
 
-        CLLocationManager.requestAuthorization(cancel: context).doneCC {
+        let p = CLLocationManager.requestAuthorizationCC().done {
             XCTFail("not cancelled")
         }.catch(policy: .allErrors) { error in
             error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
         }
         after(.milliseconds(5)).done {
-            context.cancel()
+            p.cancel()
         }
 
         waitForExpectations(timeout: 1, handler: nil)

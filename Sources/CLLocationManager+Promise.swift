@@ -1,7 +1,7 @@
 import CoreLocation.CLLocationManager
 import PromiseKit
 #if !CPKCocoaPods
-@testable import CancelForPromiseKit
+import CancelForPromiseKit
 #endif
 
 /**
@@ -47,20 +47,18 @@ extension CLLocationManager {
        the provided block if it exists. If the block does not exist, simply return the
        last location.
      */
-    public class func requestLocationCC(authorizationType: RequestAuthorizationType = .automatic, cancel: CancelContext? = nil, satisfying block: ((CLLocation) -> Bool)? = nil) -> Promise<[CLLocation]> {
+    public class func requestLocationCC(authorizationType: RequestAuthorizationType = .automatic, satisfying block: ((CLLocation) -> Bool)? = nil) -> CancellablePromise<[CLLocation]> {
         
-        let cancelContext = cancel ?? CancelContext()
-
-        func std() -> Promise<[CLLocation]> {
-            return LocationManager(cancel: cancelContext, satisfying: block).promise
+        func std() -> CancellablePromise<[CLLocation]> {
+            return LocationManager(satisfying: block).promise
         }
 
-        func auth() -> Promise<Void> {
+        func auth() -> CancellablePromise<Void> {
         #if os(macOS)
-            return Promise(cancel: cancelContext) { seal in seal.fulfill(()) }
+            return CancellablePromise { seal in seal.fulfill(()) }
         #else
-            func auth(type: PMKCLAuthorizationType) -> Promise<Void> {
-                return AuthorizationCatcher(type: type, cancel: cancel).promise.doneCC(on: nil) {
+            func auth(type: PMKCLAuthorizationType) -> CancellablePromise<Void> {
+                return AuthorizationCatcher(type: type).promise.done(on: nil) {
                     switch $0 {
                     case .restricted, .denied:
                         throw PMKError.notAuthorized
@@ -90,29 +88,28 @@ extension CLLocationManager {
         case .authorizedAlways, .authorizedWhenInUse:
             return std()
         case .notDetermined:
-            return auth().thenCC(std)
+            return auth().then(std)
         case .denied, .restricted:
-            return Promise(error: PMKError.notAuthorized)
+            return CancellablePromise(error: PMKError.notAuthorized)
         }
     }
 
     @available(*, deprecated: 5.0, renamed: "requestLocation")
-    public class func promiseCC(_ requestAuthorizationType: RequestAuthorizationType = .automatic, cancel: CancelContext? = nil, satisfying block: ((CLLocation) -> Bool)? = nil) -> Promise<[CLLocation]> {
-        return requestLocationCC(authorizationType: requestAuthorizationType, cancel: cancel, satisfying: block)
+    public class func promiseCC(_ requestAuthorizationType: RequestAuthorizationType = .automatic, satisfying block: ((CLLocation) -> Bool)? = nil) -> CancellablePromise<[CLLocation]> {
+        return requestLocationCC(authorizationType: requestAuthorizationType, satisfying: block)
     }
 }
 
 private class LocationManager: CLLocationManager, CLLocationManagerDelegate, CancellableTask {
-    let (promise, seal) = Promise<[CLLocation]>.pending()
+    let (promise, seal) = CancellablePromise<[CLLocation]>.pending()
     let satisfyingBlock: ((CLLocation) -> Bool)?
 
-    init(cancel: CancelContext, satisfying block: ((CLLocation) -> Bool)? = nil) {
+    init(satisfying block: ((CLLocation) -> Bool)? = nil) {
         satisfyingBlock = block
         super.init()
         delegate = self
         
-        promise.cancelContext = cancel
-        cancel.append(task: self, reject: seal.reject, description: PromiseDescription(promise))
+        promise.cancelContext.append(task: self, reject: seal.reject, description: PromiseDescription(promise))
         
     #if !os(tvOS)
         startUpdatingLocation()
@@ -165,26 +162,26 @@ extension CLLocationManager {
       - Note: This method will not perform upgrades from “when-in-use” to “always” unless you specify `.always` for the value of `type`.
      */
     @available(iOS 8, tvOS 9, watchOS 2, *)
-    public class func requestAuthorization(type requestedAuthorizationType: RequestAuthorizationType = .automatic, cancel: CancelContext? = nil) -> Promise<CLAuthorizationStatus> {
+    public class func requestAuthorizationCC(type requestedAuthorizationType: RequestAuthorizationType = .automatic) -> CancellablePromise<CLAuthorizationStatus> {
 
         let currentStatus = CLLocationManager.authorizationStatus()
 
-        func std(type: PMKCLAuthorizationType) -> Promise<CLAuthorizationStatus> {
+        func std(type: PMKCLAuthorizationType) -> CancellablePromise<CLAuthorizationStatus> {
             if currentStatus == .notDetermined {
                 return AuthorizationCatcher(type: type, cancel: cancel).promise
             } else {
-                return .valueCC(currentStatus, cancel: cancel)
+                return .value(currentStatus, cancel: cancel)
             }
         }
 
         switch requestedAuthorizationType {
         case .always:
-            func iOS11Check() -> Promise<CLAuthorizationStatus> {
+            func iOS11Check() -> CancellablePromise<CLAuthorizationStatus> {
                 switch currentStatus {
                 case .notDetermined, .authorizedWhenInUse:
                     return AuthorizationCatcher(type: .always, cancel: cancel).promise
                 default:
-                    return .valueCC(currentStatus, cancel: cancel)
+                    return .value(currentStatus, cancel: cancel)
                 }
             }
         #if PMKiOS11
@@ -211,7 +208,7 @@ extension CLLocationManager {
                     return AuthorizationCatcher(type: .always, cancel: cancel).promise
                 }
             } else {
-                return .valueCC(currentStatus, cancel: cancel)
+                return .value(currentStatus, cancel: cancel)
             }
         }
     }
@@ -219,15 +216,14 @@ extension CLLocationManager {
 
 @available(iOS 8, *)
 private class AuthorizationCatcher: CLLocationManager, CLLocationManagerDelegate, CancellableTask {
-    let (promise, seal) = Promise<CLAuthorizationStatus>.pending()
+    let (promise, seal) = CancellablePromise<CLAuthorizationStatus>.pending()
     var retainCycle: AuthorizationCatcher?
     let initialAuthorizationState = CLLocationManager.authorizationStatus()
 
-    init(type: PMKCLAuthorizationType, cancel: CancelContext) {
+    init(type: PMKCLAuthorizationType) {
         super.init()
 
-        promise.cancelContext = cancel
-        cancel.append(task: self, reject: seal.reject)
+        promise.cancelContext.append(task: self, reject: seal.reject)
         
         func ask(type: PMKCLAuthorizationType) {
             delegate = self

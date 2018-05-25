@@ -1,7 +1,7 @@
 import CPKCoreLocation
 import CoreLocation
 import PromiseKit
-@testable import CancelForPromiseKit
+import CancelForPromiseKit
 import XCTest
 #if os(iOS) || os(watchOS) || os(OSX)
     import class Contacts.CNPostalAddress
@@ -17,14 +17,12 @@ class CLGeocoderTests: XCTestCase {
             }
         }
 
-        let context = CancelContext()
         let ex = expectation(description: "")
-        MockGeocoder().reverseGeocodeCC(location: CLLocation(), cancel: context).doneCC { _ in
+        MockGeocoder().reverseGeocodeCC(location: CLLocation()).done { _ in
             XCTFail("not cancelled")
-        }.catchCC(policy: .allErrors) { error in
+        }.catch(policy: .allErrors) { error in
             error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
-        }
-        context.cancel()
+        }.cancel()
         
         waitForExpectations(timeout: 1)
     }
@@ -38,13 +36,12 @@ class CLGeocoderTests: XCTestCase {
             }
         }
 
-        let context = CancelContext()
         let ex = expectation(description: "")
-        MockGeocoder().geocodeCC([:], cancel: context).doneCC { _ in
+        let context = MockGeocoder().geocodeCC([:]).done { _ in
             XCTFail("not cancelled")
-        }.catchCC(policy: .allErrors) { error in
+        }.catch(policy: .allErrors) { error in
             error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
-        }
+        }.cancelContext
         after(.milliseconds(50)).done {
             context.cancel()
         }
@@ -61,15 +58,14 @@ class CLGeocoderTests: XCTestCase {
             }
         }
 
-        let context = CancelContext()
         let ex = expectation(description: "")
-        MockGeocoder().geocodeCC("", cancel: context).doneCC { _ in
+        let p = MockGeocoder().geocodeCC("").done { _ in
             XCTFail("not cancelled")
-        }.catchCC(policy: .allErrors) { error in
+        }.catch(policy: .allErrors) { error in
             error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
         }
         after(.milliseconds(50)).done {
-            context.cancel()
+            p.cancel()
         }
         waitForExpectations(timeout: 1)
     }
@@ -86,15 +82,14 @@ class CLGeocoderTests: XCTestCase {
             }
         }
 
-        let context = CancelContext()
         let ex = expectation(description: "")
-        MockGeocoder().geocodePostalAddressCC(CNPostalAddress(), cancel: context).doneCC { _ in
+        let p = MockGeocoder().geocodePostalAddressCC(CNPostalAddress()).done { _ in
             XCTFail("not cancelled")
-        }.catchCC(policy: .allErrors) { error in
+        }.catch(policy: .allErrors) { error in
             error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
         }
         after(.milliseconds(50)).done {
-            context.cancel()
+            p.cancel()
         }
         waitForExpectations(timeout: 1)
     }
@@ -112,13 +107,13 @@ class CLGeocoderTests: XCTestCase {
 
         let context = CancelContext()
         let ex = expectation(description: "")
-        MockGeocoder().geocodePostalAddressCC(CNPostalAddress(), preferredLocale: nil, cancel: context).doneCC { _ in
+        let p = MockGeocoder().geocodePostalAddressCC(CNPostalAddress(), preferredLocale: nil).done { _ in
             XCTFail("not cancelled")
-        }.catchCC(policy: .allErrors) { error in
+        }.catch(policy: .allErrors) { error in
             error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
         }
         after(.milliseconds(50)).done {
-            context.cancel()
+            p.cancel()
         }
         waitForExpectations(timeout: 1)
     }
