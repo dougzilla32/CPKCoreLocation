@@ -1,7 +1,7 @@
 import CPKCoreLocation
 import CoreLocation
 import PromiseKit
-import CancelForPromiseKit
+@testable import CancelForPromiseKit
 import XCTest
 #if os(iOS) || os(watchOS) || os(OSX)
     import class Contacts.CNPostalAddress

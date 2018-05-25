@@ -1,7 +1,7 @@
 import CoreLocation.CLLocationManager
 import PromiseKit
 #if !CPKCocoaPods
-import CancelForPromiseKit
+@testable import CancelForPromiseKit
 #endif
 
 /**

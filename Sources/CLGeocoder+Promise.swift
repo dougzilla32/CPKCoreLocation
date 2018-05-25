@@ -1,7 +1,7 @@
 import CoreLocation.CLGeocoder
 import PromiseKit
 #if !CPKCocoaPods
-import CancelForPromiseKit
+@testable import CancelForPromiseKit
 #endif
 #if os(iOS) || os(watchOS) || os(OSX)
 import class Contacts.CNPostalAddress
