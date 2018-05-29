@@ -105,7 +105,6 @@ class CLGeocoderTests: XCTestCase {
             }
         }
 
-        let context = CancelContext()
         let ex = expectation(description: "")
         let p = MockGeocoder().geocodePostalAddressCC(CNPostalAddress(), preferredLocale: nil).done { _ in
             XCTFail("not cancelled")
