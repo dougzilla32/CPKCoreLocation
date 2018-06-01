@@ -1,6 +1,6 @@
 # PromiseKit CoreLocation Extensions ![Build Status]
 
-This project adds promises to Apple’s CoreLocation framework.
+This project adds cancellable promises to [PromiseKit's CoreLocation extension].
 
 ## CocoaPods
 
@@ -27,4 +27,5 @@ import CancelForPromiseKit
 import CPKCoreLocation
 ```
 
-[Build Status]: https://travis-ci.org/CancelForPromiseKit/CoreLocation.svg?branch=master
+[Build Status]: https://travis-ci.org/dougzilla32/CancelForPromiseKit-CoreLocation.svg?branch=master
+[PromiseKit's CoreLocation extension]: https://github.com/PromiseKit/CoreLocation
