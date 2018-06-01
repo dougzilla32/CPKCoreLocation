@@ -1,11 +1,12 @@
 # PromiseKit CoreLocation Extensions ![Build Status]
 
-This project adds promises to Apple’s MapKit framework.
+This project adds promises to Apple’s CoreLocation framework.
 
 ## CocoaPods
 
 ```ruby
 pod "PromiseKit/CoreLocation", "~> 6.0"
+pod "CancelForPromiseKit/CoreLocation", "~> 1.0"
 ```
 
 The extensions are built into `PromiseKit.framework` thus nothing else is needed.
@@ -14,6 +15,7 @@ The extensions are built into `PromiseKit.framework` thus nothing else is needed
 
 ```ruby
 github "PromiseKit/CoreLocation" ~> 3.0
+github "CancelForPromiseKit/CoreLocation" ~> 1.0
 ```
 
 The extensions are built into their own framework:
@@ -21,14 +23,8 @@ The extensions are built into their own framework:
 ```swift
 // swift
 import PromiseKit
-import PMKCoreLocation
+import CancelForPromiseKit
+import CPKCoreLocation
 ```
 
-```objc
-// objc
-@import PromiseKit;
-@import PMKCoreLocation;
-```
-
-
-[Build Status]: https://travis-ci.org/PromiseKit/CoreLocation.svg?branch=master
+[Build Status]: https://travis-ci.org/CancelForPromiseKit/CoreLocation.svg?branch=master
