@@ -1,5 +1,10 @@
 import CoreLocation.CLLocationManager
 import PromiseKit
+
+#if canImport(PMKCoreLocation)
+import PMKCoreLocation
+#endif
+
 #if !CPKCocoaPods
 import CancelForPromiseKit
 #endif
@@ -16,21 +21,6 @@ import CancelForPromiseKit
     import CancelForPromiseKit
 */
 extension CLLocationManager {
-    /*
-     /// The type of location permission we are asking for
-     public enum RequestAuthorizationType {
-         /// Determine the authorization from the application’s plist
-         case automatic
-         /// Request always-authorization
-         case always
-         /// Request when-in-use-authorization
-         case whenInUse
-     }
-     */
-
-    public enum PMKError: Error {
-        case notAuthorized
-    }
     /**
      Request the current location, with the ability to cancel the request.
      - Note: to obtain a single location use `Promise.lastValue`

@@ -1,8 +1,14 @@
 import CoreLocation.CLGeocoder
 import PromiseKit
+
+#if canImport(PMKCoreLocation)
+import PMKCoreLocation
+#endif
+
 #if !CPKCocoaPods
 import CancelForPromiseKit
 #endif
+
 #if os(iOS) || os(watchOS) || os(OSX)
 import class Contacts.CNPostalAddress
 #endif
