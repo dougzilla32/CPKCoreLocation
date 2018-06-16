@@ -1,7 +1,7 @@
 import CoreLocation.CLLocationManager
 import PromiseKit
 
-#if canImport(PMKCoreLocation)
+#if swift(>=4.1) && canImport(PMKCoreLocation)
 import PMKCoreLocation
 #endif
 
