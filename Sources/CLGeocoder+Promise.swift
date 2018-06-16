@@ -1,7 +1,7 @@
 import CoreLocation.CLGeocoder
 import PromiseKit
 
-#if swift(>=4.1) && canImport(PMKCoreLocation)
+#if CPKCarthage || (swift(>=4.1) && canImport(PMKCoreLocation))
 import PMKCoreLocation
 #endif
 
