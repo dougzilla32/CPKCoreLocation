@@ -29,8 +29,8 @@ cache:
 before_install:
   - carthage bootstrap --cache-builds --no-use-binaries --platform $PLAT --verbose
 install:
-  - xcodebuild -scheme CPKCoreLocation -quiet -destination "$DST" SWIFT_VERSION=$SWFT SWIFT_TREAT_WARNINGS_AS_ERRORS=YES build
+  - xcodebuild -scheme CPKCoreLocation -quiet -destination "$DST" SWIFT_VERSION=$SWFT SWIFT_TREAT_WARNINGS_AS_ERRORS=YES build-for-testing -enableCodeCoverage YES
 script:
   - if [ "$PLAT" != "watchOS" ]; then
-      xcodebuild -scheme CPKCoreLocation -destination "$DST" test;
+      xcodebuild -scheme CPKCoreLocation -destination "$DST" SWIFT_VERSION=$SWFT test;
     fi
