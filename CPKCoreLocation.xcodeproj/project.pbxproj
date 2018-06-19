@@ -359,6 +359,8 @@
 					"$(inherited)",
 					"-framework",
 					"\"PromiseKit\"",
+					"-Xlinker",
+					"-w",
 				);
 				PODS_BUILD_DIR = "${BUILD_DIR}";
 				PODS_CONFIGURATION_BUILD_DIR = "${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
@@ -432,6 +434,8 @@
 					"$(inherited)",
 					"-framework",
 					"\"PromiseKit\"",
+					"-Xlinker",
+					"-w",
 				);
 				PODS_BUILD_DIR = "${BUILD_DIR}";
 				PODS_CONFIGURATION_BUILD_DIR = "${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
