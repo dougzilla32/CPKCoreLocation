@@ -1,7 +1,7 @@
 import CoreLocation.CLLocationManager
 import PromiseKit
 
-#if CPKCarthage
+#if Carthage
 import PMKCoreLocation
 #else
 #if swift(>=4.1)
