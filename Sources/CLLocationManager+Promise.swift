@@ -35,7 +35,6 @@ extension CLLocationManager {
          determine the authorization type we should request automatically. If you
          want to force one or the other, change this parameter from its default
          value.
-       - cancel: Optional cancel context, overrides the default context.
        - block: A block by which to perform any filtering of the locations that are
          returned. In order to only retrieve accurate locations, only return true if the
          locations horizontal accuracy < 50
@@ -164,9 +163,9 @@ extension CLLocationManager {
 
         func std(type: PMKCLAuthorizationType) -> CancellablePromise<CLAuthorizationStatus> {
             if currentStatus == .notDetermined {
-                return AuthorizationCatcher(type: type, cancel: cancel).promise
+                return AuthorizationCatcher(type: type).promise
             } else {
-                return .value(currentStatus, cancel: cancel)
+                return .value(currentStatus)
             }
         }
 
@@ -175,9 +174,9 @@ extension CLLocationManager {
             func iOS11Check() -> CancellablePromise<CLAuthorizationStatus> {
                 switch currentStatus {
                 case .notDetermined, .authorizedWhenInUse:
-                    return AuthorizationCatcher(type: .always, cancel: cancel).promise
+                    return AuthorizationCatcher(type: .always).promise
                 default:
-                    return .value(currentStatus, cancel: cancel)
+                    return .value(currentStatus)
                 }
             }
         #if PMKiOS11
@@ -199,12 +198,12 @@ extension CLLocationManager {
             if currentStatus == .notDetermined {
                 switch Bundle.main.permissionType {
                 case .both, .whenInUse:
-                    return AuthorizationCatcher(type: .whenInUse, cancel: cancel).promise
+                    return AuthorizationCatcher(type: .whenInUse).promise
                 case .always:
-                    return AuthorizationCatcher(type: .always, cancel: cancel).promise
+                    return AuthorizationCatcher(type: .always).promise
                 }
             } else {
-                return .value(currentStatus, cancel: cancel)
+                return .value(currentStatus)
             }
         }
     }
