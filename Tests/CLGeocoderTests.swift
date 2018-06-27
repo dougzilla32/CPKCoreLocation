@@ -4,7 +4,7 @@ import PromiseKit
 import CancelForPromiseKit
 import XCTest
 #if os(iOS) || os(watchOS) || os(OSX)
-    import class Contacts.CNPostalAddress
+import class Contacts.CNPostalAddress
 #endif
 
 class CLGeocoderTests: XCTestCase {
