@@ -218,7 +218,7 @@ private class AuthorizationCatcher: CLLocationManager, CLLocationManagerDelegate
     init(type: PMKCLAuthorizationType) {
         super.init()
 
-        promise.cancelContext.append(task: self, reject: seal.reject)
+        promise.appendCancellableTask(task: self, reject: seal.reject)
         
         func ask(type: PMKCLAuthorizationType) {
             delegate = self
