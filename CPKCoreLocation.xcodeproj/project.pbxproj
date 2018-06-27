@@ -18,7 +18,7 @@
 		91DF53C520DE2E8F001CBF46 /* CancelForPromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B517A720A3938400CD1213 /* CancelForPromiseKit.framework */; };
 		91DF53D120DE2E9F001CBF46 /* CLGeocoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63199F141D5FF7B9007E8A0E /* CLGeocoderTests.swift */; };
 		91DF53D220DE2E9F001CBF46 /* CLLocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63199F151D5FF7B9007E8A0E /* CLLocationManagerTests.swift */; };
-		91DF53DE20DE2EC0001CBF46 /* CPKCoreLocationCT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91DF53CB20DE2E8F001CBF46 /* CPKCoreLocationCT.framework */; };
+		91DF53DE20DE2EC0001CBF46 /* CPKCoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91DF53CB20DE2E8F001CBF46 /* CPKCoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +54,7 @@
 		913ADD9D20C105E7001F2B57 /* README.markdown */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.markdown; sourceTree = "<group>"; };
 		91B517A720A3938400CD1213 /* CancelForPromiseKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CancelForPromiseKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		91B92B2420D589D500CCEADB /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		91DF53CB20DE2E8F001CBF46 /* CPKCoreLocationCT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CPKCoreLocationCT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		91DF53CB20DE2E8F001CBF46 /* CPKCoreLocation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CPKCoreLocation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		91DF53DA20DE2E9F001CBF46 /* CPKCLTestsCT.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CPKCLTestsCT.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -87,7 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91DF53DE20DE2EC0001CBF46 /* CPKCoreLocationCT.framework in Frameworks */,
+				91DF53DE20DE2EC0001CBF46 /* CPKCoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,7 +111,7 @@
 			children = (
 				63C7FFA71D5BEE09003BAE60 /* CPKCoreLocation.framework */,
 				63C7FFF21D5C020D003BAE60 /* CPKCLTests.xctest */,
-				91DF53CB20DE2E8F001CBF46 /* CPKCoreLocationCT.framework */,
+				91DF53CB20DE2E8F001CBF46 /* CPKCoreLocation.framework */,
 				91DF53DA20DE2E9F001CBF46 /* CPKCLTestsCT.xctest */,
 			);
 			name = Products;
@@ -228,7 +228,7 @@
 			);
 			name = CPKCoreLocationCT;
 			productName = "PMK+UIKit";
-			productReference = 91DF53CB20DE2E8F001CBF46 /* CPKCoreLocationCT.framework */;
+			productReference = 91DF53CB20DE2E8F001CBF46 /* CPKCoreLocation.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		91DF53CD20DE2E9F001CBF46 /* CPKCLTestsCT */ = {
@@ -649,8 +649,8 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_MODULE_NAME = "${TARGET_NAME}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = CPKCoreLocation;
+				PRODUCT_NAME = CPKCoreLocation;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "CPKCarthage DEBUG";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -667,8 +667,8 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_MODULE_NAME = "${TARGET_NAME}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = CPKCoreLocation;
+				PRODUCT_NAME = CPKCoreLocation;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = CPKCarthage;
 			};
