@@ -1,4 +1,6 @@
-# PromiseKit CoreLocation Extensions ![Build Status]
+# PromiseKit CoreLocation Extensions
+
+[![Build Status](https://travis-ci.org/dougzilla32/CPKCoreLocation.svg?branch=master)](https://travis-ci.org/dougzilla32/CPKCoreLocation)
 
 This project adds cancellable promises to [PromiseKit's CoreLocation extension].
 
@@ -33,5 +35,4 @@ To build with Carthage on versions of Swift prior to 4.1, set the 'Carthage' fla
         'Swift Compiler - Custom Flags' -> 'Active Compilation Conditions' -> 'Debug'
         'Swift Compiler - Custom Flags' -> 'Active Compilation Conditions' -> 'Release'
 
-[Build Status]: https://travis-ci.org/dougzilla32/CPKCoreLocation.svg?branch=master
 [PromiseKit's CoreLocation extension]: https://github.com/PromiseKit/CoreLocation
