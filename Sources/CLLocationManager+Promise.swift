@@ -88,11 +88,6 @@ extension CLLocationManager {
             return CancellablePromise(error: PMKError.notAuthorized)
         }
     }
-
-    @available(*, deprecated: 5.0, renamed: "requestLocation")
-    public class func promiseCC(_ requestAuthorizationType: RequestAuthorizationType = .automatic, satisfying block: ((CLLocation) -> Bool)? = nil) -> CancellablePromise<[CLLocation]> {
-        return requestLocationCC(authorizationType: requestAuthorizationType, satisfying: block)
-    }
 }
 
 private class LocationManager: CLLocationManager, CLLocationManagerDelegate, CancellableTask {
