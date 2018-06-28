@@ -1,4 +1,4 @@
-# PromiseKit CoreLocation Extensions
+# CancelForPromiseKit CoreLocation Extensions
 
 [![Build Status](https://travis-ci.org/dougzilla32/CPKCoreLocation.svg?branch=master)](https://travis-ci.org/dougzilla32/CPKCoreLocation)
 
