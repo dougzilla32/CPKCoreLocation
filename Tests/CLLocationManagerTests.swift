@@ -55,9 +55,7 @@ class Test_CLLocationManager_Swift: XCTestCase {
         }.catch(policy: .allErrors) { error in
             error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
         }
-        after(.milliseconds(5)).done {
-            p.cancel()
-        }
+        p.cancel()
 
         waitForExpectations(timeout: 1, handler: nil)
     }
