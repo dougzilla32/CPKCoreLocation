@@ -165,7 +165,7 @@ extension CLLocationManager {
             if currentStatus == .notDetermined {
                 return AuthorizationCatcher(type: type).promise
             } else {
-                return .value(currentStatus)
+                return .valueCC(currentStatus)
             }
         }
 
@@ -176,7 +176,7 @@ extension CLLocationManager {
                 case .notDetermined, .authorizedWhenInUse:
                     return AuthorizationCatcher(type: .always).promise
                 default:
-                    return .value(currentStatus)
+                    return .valueCC(currentStatus)
                 }
             }
         #if PMKiOS11
@@ -203,7 +203,7 @@ extension CLLocationManager {
                     return AuthorizationCatcher(type: .always).promise
                 }
             } else {
-                return .value(currentStatus)
+                return .valueCC(currentStatus)
             }
         }
     }
