@@ -50,7 +50,7 @@ class Test_CLLocationManager_Swift: XCTestCase {
     func test_requestAuthorization() {
         let ex = expectation(description: "")
 
-        let p = CLLocationManager.requestAuthorizationCC().done {
+        let p = CLLocationManager.requestAuthorizationCC().done { _ in
             XCTFail("not cancelled")
         }.catch(policy: .allErrors) { error in
             error.isCancelled ? ex.fulfill() : XCTFail("error \(error)")
