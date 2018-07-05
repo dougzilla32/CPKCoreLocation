@@ -2,9 +2,9 @@
 
 [![badge-docs](https://dougzilla32.github.io/CPKCoreLocation/api/badge.svg)](https://dougzilla32.github.io/CPKCoreLocation/api/) [![Build Status](https://travis-ci.org/dougzilla32/CPKCoreLocation.svg?branch=master)](https://travis-ci.org/dougzilla32/CPKCoreLocation)
 
-This project adds cancellable promises to [PromiseKit's CoreLocation extension].
+The [CancelForPromiseKit CoreLocation Extensions] add cancellable promises to [PromiseKit's CoreLocation extensions].
 
-Here is the [Jazzy](https://github.com/realm/jazzy) generated [CancelForPromiseKit CoreLocation Extensions API documentation](https://dougzilla32.github.io/CPKCoreLocation/api/).
+Here's a link to the [Jazzy](https://github.com/realm/jazzy) generated [API documentation](https://dougzilla32.github.io/CPKCoreLocation/api/).
 
 ## CocoaPods
 
@@ -37,4 +37,5 @@ To build with Carthage on versions of Swift prior to 4.1, set the 'Carthage' fla
         'Swift Compiler - Custom Flags' -> 'Active Compilation Conditions' -> 'Debug'
         'Swift Compiler - Custom Flags' -> 'Active Compilation Conditions' -> 'Release'
 
-[PromiseKit's CoreLocation extension]: https://github.com/PromiseKit/CoreLocation
+[CancelForPromiseKit CoreLocation Extensions]: https://github.com/dougzilla32/CPKCoreLocation
+[PromiseKit's CoreLocation extensions]: https://github.com/PromiseKit/CoreLocation
