@@ -7,7 +7,7 @@ import XCTest
 #if !os(tvOS)
 
 class Test_CLLocationManager_Swift: XCTestCase {
-    func test_fulfills_with_multiple_locations() {
+    func testCancel_fulfills_with_multiple_locations() {
         swizzle(CLLocationManager.self, #selector(CLLocationManager.startUpdatingLocation)) {
             swizzle(CLLocationManager.self, #selector(CLLocationManager.authorizationStatus), isClassMethod: true) {
                 let ex = expectation(description: "")
@@ -26,7 +26,7 @@ class Test_CLLocationManager_Swift: XCTestCase {
         }
     }
 
-    func test_fufillsWithSatisfyingBlock() {
+    func testCancel_fufillsWithSatisfyingBlock() {
         swizzle(CLLocationManager.self, #selector(CLLocationManager.startUpdatingLocation)) {
             swizzle(CLLocationManager.self, #selector(CLLocationManager.authorizationStatus), isClassMethod: true) {
                 let ex = expectation(description: "")
@@ -47,7 +47,7 @@ class Test_CLLocationManager_Swift: XCTestCase {
     }
 
 #if os(iOS)
-    func test_requestAuthorization() {
+    func testCancel_requestAuthorization() {
         let ex = expectation(description: "")
 
         let p = CLLocationManager.requestAuthorizationCC().done { _ in

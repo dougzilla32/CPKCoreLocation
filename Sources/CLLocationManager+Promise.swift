@@ -45,7 +45,7 @@ extension CLLocationManager {
     public class func requestLocationCC(authorizationType: RequestAuthorizationType = .automatic, satisfying block: ((CLLocation) -> Bool)? = nil) -> CancellablePromise<[CLLocation]> {
         
         func std() -> CancellablePromise<[CLLocation]> {
-            return LocationManager(satisfying: block).promise
+            return CancellableLocationManager(satisfying: block).promise
         }
 
         func auth() -> CancellablePromise<Void> {
@@ -53,7 +53,7 @@ extension CLLocationManager {
             return CancellablePromise { seal in seal.fulfill(()) }
         #else
             func auth(type: PMKCLAuthorizationType) -> CancellablePromise<Void> {
-                return AuthorizationCatcher(type: type).promise.done(on: nil) {
+                return CancellableAuthorizationCatcher(type: type).promise.done(on: nil) {
                     switch $0 {
                     case .restricted, .denied:
                         throw PMKError.notAuthorized
@@ -90,7 +90,7 @@ extension CLLocationManager {
     }
 }
 
-private class LocationManager: CLLocationManager, CLLocationManagerDelegate, CancellableTask {
+private class CancellableLocationManager: CLLocationManager, CLLocationManagerDelegate, CancellableTask {
     let (promise, seal) = CancellablePromise<[CLLocation]>.pending()
     let satisfyingBlock: ((CLLocation) -> Bool)?
 
@@ -158,7 +158,7 @@ extension CLLocationManager {
 
         func std(type: PMKCLAuthorizationType) -> CancellablePromise<CLAuthorizationStatus> {
             if currentStatus == .notDetermined {
-                return AuthorizationCatcher(type: type).promise
+                return CancellableAuthorizationCatcher(type: type).promise
             } else {
                 return .valueCC(currentStatus)
             }
@@ -169,7 +169,7 @@ extension CLLocationManager {
             func iOS11Check() -> CancellablePromise<CLAuthorizationStatus> {
                 switch currentStatus {
                 case .notDetermined, .authorizedWhenInUse:
-                    return AuthorizationCatcher(type: .always).promise
+                    return CancellableAuthorizationCatcher(type: .always).promise
                 default:
                     return .valueCC(currentStatus)
                 }
@@ -193,9 +193,9 @@ extension CLLocationManager {
             if currentStatus == .notDetermined {
                 switch Bundle.main.permissionType {
                 case .both, .whenInUse:
-                    return AuthorizationCatcher(type: .whenInUse).promise
+                    return CancellableAuthorizationCatcher(type: .whenInUse).promise
                 case .always:
-                    return AuthorizationCatcher(type: .always).promise
+                    return CancellableAuthorizationCatcher(type: .always).promise
                 }
             } else {
                 return .valueCC(currentStatus)
@@ -205,9 +205,9 @@ extension CLLocationManager {
 }
 
 @available(iOS 8, *)
-private class AuthorizationCatcher: CLLocationManager, CLLocationManagerDelegate, CancellableTask {
+private class CancellableAuthorizationCatcher: CLLocationManager, CLLocationManagerDelegate, CancellableTask {
     let (promise, seal) = CancellablePromise<CLAuthorizationStatus>.pending()
-    var retainCycle: AuthorizationCatcher?
+    var retainCycle: CancellableAuthorizationCatcher?
     let initialAuthorizationState = CLLocationManager.authorizationStatus()
 
     init(type: PMKCLAuthorizationType) {

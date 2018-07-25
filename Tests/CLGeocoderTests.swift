@@ -8,7 +8,7 @@ import class Contacts.CNPostalAddress
 #endif
 
 class CLGeocoderTests: XCTestCase {
-    func test_reverseGeocodeLocation() {
+    func testCancel_reverseGeocodeLocation() {
         class MockGeocoder: CLGeocoder {
             override func reverseGeocodeLocation(_ location: CLLocation, completionHandler: @escaping CLGeocodeCompletionHandler) {
                 after(.milliseconds(100)).done {
@@ -27,7 +27,7 @@ class CLGeocoderTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
 
-    func test_geocodeAddressDictionary() {
+    func testCancel_geocodeAddressDictionary() {
         class MockGeocoder: CLGeocoder {
             override func geocodeAddressDictionary(_ addressDictionary: [AnyHashable: Any], completionHandler: @escaping CLGeocodeCompletionHandler) {
                 after(.milliseconds(100)).done {
@@ -49,7 +49,7 @@ class CLGeocoderTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
 
-    func test_geocodeAddressString() {
+    func testCancel_geocodeAddressString() {
         class MockGeocoder: CLGeocoder {
             override func geocodeAddressString(_ addressString: String, completionHandler: @escaping CLGeocodeCompletionHandler) {
                 after(.milliseconds(100)).done {
@@ -71,7 +71,7 @@ class CLGeocoderTests: XCTestCase {
     }
 
 #if !os(tvOS) && swift(>=3.2)
-    func test_geocodePostalAddress() {
+    func testCancel_geocodePostalAddress() {
         guard #available(iOS 11.0, OSX 10.13, watchOS 4.0, *) else { return }
 
         class MockGeocoder: CLGeocoder {
@@ -94,7 +94,7 @@ class CLGeocoderTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
 
-    func test_geocodePostalAddressLocale() {
+    func testCancel_geocodePostalAddressLocale() {
         guard #available(iOS 11.0, OSX 10.13, watchOS 4.0, *) else { return }
 
         class MockGeocoder: CLGeocoder {
